@@ -1,0 +1,41 @@
+h2{
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+img{
+  height: 7rem;
+  padding: 0;
+}
+
+.butn-div{
+  text-align: center;
+  margin: 15% auto;
+}
+
+.process-img{
+  text-align: center;
+  margin-top: 8rem;
+}
+
+.container {
+  margin-top: 4rem;
+}
+
+.inputForm{
+  margin: 5%;
+}
+
+.email{
+  margin: 5rem 3rem;
+}
+
+.emailIcon{
+  font-size: 3rem;
+}
+
+.text-center{
+  margin: 5rem 0 0;
+  color: white;
+}

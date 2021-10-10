@@ -1,0 +1,111 @@
+<%- include("partials/header") %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col border border-dark rounded">
+        <h2>Input</h2>
+        <form class="inputForm" action="/" method="post">
+          <div class="form-row mb-4">
+            <div class="col-md-6">
+              <label for="phase">Phase</label>
+            </div>
+            <div class="col-md-6">
+              <select required class="custom-select" name="phase">
+                <option selected value="">Select</option>
+                <option value="1">Three Phase</option>
+                <option value="2">Single Phase</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row mb-4"">
+            <div class="col-md-6">
+              <label for="power">Rated Power</label>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <input class="form-control" type="text" name="power" placeholder="Power" required>
+                </div>
+                <div class="col-md-6">
+                  <select required class="custom-select" name="powerUnit">
+                    <option selected value="">Unit</option>
+                    <option value="1">kW</option>
+                    <option value="2">Hp</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-row mb-4"">
+            <div class="col-md-6" >
+              <label for="pf">Power Factor</label>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control" type="number" min="0" max="1" step="0.01" name="pf" placeholder="PF" required>
+            </div>
+          </div>
+          <div class="form-row mb-4"">
+            <div class="col-md-6" >
+              <label for="pf">Efficiency%</label>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control" type="number" name="eff" min="0" max="100" placeholder="Eff" required>
+            </div>
+          </div>
+          <div class="butn-div">
+            <button class="btn btn-dark btn-lg" type="submit" name="calc">Calculate</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-2">
+
+      </div>
+      <div class="col border border-success rounded">
+        <h2>Result</h2>
+
+        <% if(nominalCurrent===0){ %>
+          <div class="process-img">
+            <img src="https://cdn-icons-png.flaticon.com/512/60/60473.png"/>
+          </div>
+      <%  } else{ %>
+        <ul>
+          <li>Nominal Current = <%= nominalCurrent %>A</li>
+          <li>Over-load Current =<%= olCurrent %>A</li>
+          <li>Inrush Current:</li>
+        </ul>
+        <table class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th scope="col">X In</th>
+      <th scope="col">Current</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>In X 3</td>
+      <td><%=inrush3%>A</td>
+    </tr>
+    <tr>
+      <td>In X 4</td>
+      <td><%=inrush4%>A</td>
+    </tr>
+    <tr>
+      <td>In X 5</td>
+      <td><%=inrush5%>A</td>
+    </tr>
+    <tr>
+      <td>In X 7</td>
+      <td><%=inrush7%>A</td>
+    </tr>
+  </tbody>
+</table>
+
+      <%  } %>
+
+
+      </div>
+    </div>
+  </div>
+
+<%- include("partials/footer") %>
