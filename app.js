@@ -23,6 +23,7 @@ const ol = [{min: 0.1, max: 0.16}, {min: 0.16, max: 0.25}, {min: 0.25, max: 0.4}
 const olSet2 = [{min: 17, max: 25}, {min: 23, max: 32}, {min: 30, max: 40}, {min: 37, max: 50}, {min: 48, max: 65}, {min: 55, max: 70 }, {min: 63, max: 80}, {min: 80, max: 104}, {min: 95, max: 120}, {min: 110, max: 140}]
 
 app.get("/", function(req, res){
+  results.nominalCurrent = 0;
   res.render("calculator", results);
 });
 
