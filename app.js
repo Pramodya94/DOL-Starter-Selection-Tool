@@ -125,19 +125,8 @@ const olSet2 = [{
 }, {
   min: 110,
   max: 140
-}]
+}];
 
-function mccbCalc() {
-  for (let k = 0; k < mccb.length; k++) {
-    if (mccb[k] < results.inrush3 && mccb[k + 1] >= results.inrush3) {
-      return lowerMcb = mccb[k + 1];
-    }
-
-    if (mccb[k] < results.inrush5 && mccb[k + 1] >= results.inrush5) {
-      return upperMcb = mccb[k + 1];
-    }
-  }
-}
 
 app.get("/", function(req, res) {
   results.nominalCurrent = 0;
@@ -223,21 +212,38 @@ app.post("/", function(req, res) {
   if (lowerMcb === upperMcb) {
 
     if (upperMcb === 0) {
-      if (mccb[0] >= results.inrush3) {
-        lowerMcb = mccb[4];
-        upperMcb = mccb[4];
-      } else {
-        for (let j = 0; j < mccb.length; j++) {
-          if (mccb[j] < results.inrush5 && mccb[j + 1] >= results.inrush5) {
+
+        //starting of MCCB calculation
+        if (mccb[4] >= results.inrush3) {
+          if (mccb[4] >= results.inrush5) {
             lowerMcb = mccb[4];
-            upperMcb = mccb[j + 1];
+            upperMcb = mccb[4];
           } else {
-            mccbCalc();
+            for (let j = 0; j < mcb.length; j++) {
+              if (mcb[j] < results.inrush5 && mcb[j + 1] >= results.inrush5) {
+                lowerMcb = mccb[4];
+                upperMcb = mccb[j + 1];
+              }
+            }
+
+          }
+        } else{
+          console.log(mccb.length);
+
+          for (let i = 0; i < mccb.length; i++) {
+            console.log(i);
+              if (mccb[i] < results.inrush3 && mccb[i + 1] >= results.inrush3) {
+                lowerMcb = mccb[i + 1];
+              }
+
+              if (mccb[i] < results.inrush5 && mccb[i + 1] >= results.inrush5) {
+                    upperMcb = mccb[i + 1];
+                  }
+
           }
         }
 
-      }
-      results.cbSelection = lowerMcb + "A / " + upperMcb + "A " + mccbPole + "P MCCB";
+        results.cbSelection = lowerMcb + "A / " + upperMcb + "A " + mccbPole + "P MCCB";
 
     } else {
       results.cbSelection = upperMcb + "A " + mcbPole + "P C-Curve MCB";
@@ -249,6 +255,7 @@ app.post("/", function(req, res) {
           upperMcb = mccb[k + 1];
         }
       }
+
       results.cbSelection = lowerMcb + "A " + mccbPole + "P C-Curve MCB or " + upperMcb + "A " + mccbPole + "P MCCB";
 
     } else {
