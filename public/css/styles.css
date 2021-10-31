@@ -4,9 +4,13 @@ h2{
   margin-bottom: 10%;
 }
 
+div.process-img {
+  margin-top: 0;
+}
+
 img{
-  height: 7rem;
-  padding: 0;
+  height: 10rem;
+  padding: 10%;
 }
 
 .butn-div{
